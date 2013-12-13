@@ -6,6 +6,22 @@
 </head>
 <body>
 
+	<% if logged_in? %>
+		<h2>Welcome <%= current_user.email %>!</h2>
+		<%= button_to "Log Out", sessions_url, :method => :delete %>
+	<% else %>
+		<h2> Log in <%= link_to "Here!", new_sessions_url %>
+	<% end %>
+
+
+	<% if flash[:notices] %>
+	<ul>
+		<% flash[:notices].each do |notice| %>
+		<li><%= notice %></li>
+		<% end %>
+	</ul>
+<% end %>
+
 <%= yield %>
 
 </body>
