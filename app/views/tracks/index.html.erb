@@ -1,0 +1,8 @@
+<ul>
+	<% @tracks.each do |track| %>
+		<li><%= link_to track.name, track_url(track) %> --
+			<%= link_to track.album.name, album_url(track.album) %> by
+			<%= link_to track.album.band.name, band_url(track.album.band)%>
+		</li>
+	<% end %>
+</ul>

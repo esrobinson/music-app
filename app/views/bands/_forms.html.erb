@@ -1,0 +1,11 @@
+
+<% submit_url = (@band.persisted? ? band_url(@band) : bands_url) %>
+<form action=<%= submit_url %> method="POST">
+	<% if @band.persisted? %>
+		<input type="hidden", name="_method", value="PUT">
+	<% end %>
+	<label for="band_name">Band Name</label>
+	<input type="text" id="band_name" name=band[name] value="<%= @band.name %>" >
+	<br>
+	<input type="submit" value="Submit">
+</form>

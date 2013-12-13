@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if @user
       login!(@user)
       flash[:notices] = ["Login successful"]
-      redirect_to user_url(@user)
+      redirect_to bands_url
     else
       flash.now[:notices] = ["Invalid email/password"]
       render :new
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout!(current_user)
-    redirect_to new_session_url
+    redirect_to new_sessions_url
   end
 
 end

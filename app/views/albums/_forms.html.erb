@@ -1,0 +1,31 @@
+
+<% submit_url = (@album.persisted? ? album_url(@album) : band_albums_url) %>
+<form action=<%= submit_url %> method="POST">
+	<% if @album.persisted? %>
+		<input type="hidden", name="_method", value="PUT">
+	<% end %>
+	<label for="album_name">Album Name</label>
+	<input type="text" id="album_name" name=album[name] value="<%= @album.name %>" >
+	<label for="Band Name">Band Name</label>
+	<select id="album_band_id" name="album[band_id]">
+		<option value = ""></option>
+	<% @bands.each do |band| %>
+		<option value=<%= band.id %> <%= "selected" if band.id == @album.band_id%> >
+			<%= band.name %>
+		</option>
+	<% end %>
+	</select>
+	<label for="album_type">Album Type</label>
+	<select id="album_type" name="album[recording_type]">
+		<option value = ""></option>
+		<option value = "live" <%= "selected" if @album.recording_type == "live" %> >
+			Live
+		</option>
+		<option value = "studio" <%= "selected" if @album.recording_type == "studio" %> >
+			Studio
+		</option>
+	</select>
+
+	<br>
+	<input type="submit" value="Submit">
+</form>
