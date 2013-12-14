@@ -1,7 +1,13 @@
 MusicApp::Application.routes.draw do
   root :to => "users#index"
 
-  resources :users, :except => [:edit, :update, :destroy]
+  resources :users, :except => [:edit, :update, :destroy] do
+    collection do
+      get "/activate", :to => "users#activate"
+    end
+  end
+
+
   resource :sessions, :only => [:create, :destroy, :new]
 
   resources :bands do
