@@ -1,0 +1,21 @@
+<br>
+
+<h3>Notes</h3>
+<table>
+<% @notes.each do |note| %>
+<tr>
+	<td><%= note.note %></td>
+	<td><%= note.user.email%></td>
+	<td><%= button_to "Delete note", track_note_url(@track, note), :method => :delete if logged_in? && current_user.id == note.user_id%>
+	</td>
+</tr>
+<% end %>
+</table>
+<br>
+<% if logged_in? %>
+<form action=<%= track_notes_url(@track) %> method="POST">
+	<label for="note">
+	<input type="text" id=note name="note[note]">
+	<input type="submit" value="Submit">
+</form>
+<% end %>

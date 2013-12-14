@@ -6,3 +6,5 @@
 	 <%= link_to "Edit this track", edit_track_url(@track) %>
 	 <br>
 	 <%= button_to "DESTROY THIS TRACK", track_url(@track), :method => :delete %>
+
+	 <%= render "notes/note" %>
