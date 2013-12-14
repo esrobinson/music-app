@@ -10,7 +10,7 @@
 		<h2>Welcome <%= current_user.email %>!</h2>
 		<%= button_to "Log Out", sessions_url, :method => :delete %>
 	<% else %>
-		<h2> Log in <%= link_to "Here!", new_sessions_url %>
+		<h2> Log in <%= link_to "Here!", new_sessions_url %> </h2>
 	<% end %>
 
 

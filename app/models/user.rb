@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def activate
+  def activate!
     self.activated = true
     self.save
   end

@@ -9,9 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.activated = false
     if @user.save
-      flash[:notices] = ["User updated"]
-      login!(@user)
-      redirect_to bands_url
+      flash[:notices] = ["User created!"]
+      activation_email(@user)
+      redirect_to not_activated_users_url
     else
       flash.now[:notices] = @user.errors.full_messages
       render :new
@@ -38,20 +38,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # def update
-  #   @user = User.find(params[:id])
-  #   if @user.update_attributes(params[:user])
-  #     flash[:notices] = ["User updated"]
-  #     redirect_to user(@user)
-  #   else
-  #     flash.now[:notices] = @user.errors
-  #     render :edit
-  #   end
-  # end
-  #
-  # def edit
-  #   @user = User.find(params[:id])
-  #   render :edit
-  # end
+  def not_activated
+    render :not_activated
+  end
+
+  private
+
+  def activation_email(user)
+   msg = UserMailer.activation_email(user)
+   msg.deliver!
+  end
 
 end

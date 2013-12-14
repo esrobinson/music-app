@@ -3,6 +3,7 @@ MusicApp::Application.routes.draw do
 
   resources :users, :except => [:edit, :update, :destroy] do
     collection do
+      get "/not_activated", :to => "users#not_activated"
       get "/activate", :to => "users#activate"
     end
   end
