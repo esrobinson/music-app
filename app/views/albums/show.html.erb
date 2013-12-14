@@ -8,8 +8,10 @@
 		<% end %>
 	</ul>
 
+	<% if admin? %>
 	<%= link_to "Add a track", new_album_track_url(@album) %>
 	<br>
 	<%= link_to "Edit Album", edit_album_url(@album) %>
 	<br>
 	<%= button_to "DESTROY THIS ALBUM", album_url(@album), :method => :delete%>
+	<% end %>

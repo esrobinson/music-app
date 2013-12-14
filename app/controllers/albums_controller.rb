@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
-
+  before_filter :require_login, :except => [:show, :index]
+  before_filter :require_admin, :except => [:show, :index]
   def index
     @albums = Album.order(:name).includes(:band)
     render :index

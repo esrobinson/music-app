@@ -1,4 +1,6 @@
 class BandsController < ApplicationController
+  before_filter :require_login, :except => [:show, :index]
+  before_filter :require_admin, :except => [:show, :index]
 
   def index
     @bands = Band.all

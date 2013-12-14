@@ -3,8 +3,10 @@
 	<%= link_to @album.name, album_url(@album) %> by
 	 <%= link_to @band.name, band_url(@band) %></h4>
 
+
+<% if admin? %>
 	 <%= link_to "Edit this track", edit_track_url(@track) %>
 	 <br>
 	 <%= button_to "DESTROY THIS TRACK", track_url(@track), :method => :delete %>
-
+ <% end %>
 	 <%= render "notes/note" %>

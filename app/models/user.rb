@@ -9,19 +9,22 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  activated        :boolean          not null
-#  actication_token :string(255)      not null
+#  activation_token :string(255)      not null
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :authentication_token
+  attr_accessible :email, :password
   attr_reader :password
 
   validates :email, :password_digest, :session_token, :presence => true
+  validates :activation_token, :presence => true
+  validates :activated, :admin, :inclusion => [true, false]
   validates :email, :uniqueness => true
   validates :password, :on => :create, :length => { :minimum => 6 }
 
   before_validation :reset_session_token, :on => :create
   before_validation :reset_activation_token, :on => :create
+  before_validation :set_defaults, :on => :create
 
   def self.find_by_credentials(params)
     user = User.find_by_email(params[:user][:email])
@@ -31,6 +34,11 @@ class User < ActiveRecord::Base
 
   def activate!
     self.activated = true
+    self.save
+  end
+
+  def make_admin!
+    self.admin = true
     self.save
   end
 
@@ -59,6 +67,12 @@ class User < ActiveRecord::Base
   def reset_activation_token!
     reset_activation_token
     self.save!
+  end
+
+  def set_defaults
+    self.activated = false
+    self.admin = false
+    true
   end
 
 

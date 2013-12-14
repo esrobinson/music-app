@@ -6,7 +6,7 @@
 <tr>
 	<td><%= note.note %></td>
 	<td><%= note.user.email%></td>
-	<td><%= button_to "Delete note", track_note_url(@track, note), :method => :delete if logged_in? && current_user.id == note.user_id%>
+	<td><%= button_to "Delete note", track_note_url(@track, note), :method => :delete if logged_in? && (current_user.id == note.user_id || admin?)%>
 	</td>
 </tr>
 <% end %>

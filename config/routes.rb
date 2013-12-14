@@ -1,7 +1,8 @@
 MusicApp::Application.routes.draw do
-  root :to => "users#index"
+  root :to => "bands#index"
 
-  resources :users, :except => [:edit, :update, :destroy] do
+  resources :users, :except => [:edit, :destroy] do
+    post "/admin", :to => "users#make_admin"
     collection do
       get "/not_activated", :to => "users#not_activated"
       get "/activate", :to => "users#activate"

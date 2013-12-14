@@ -25,7 +25,7 @@ class NotesController < ApplicationController
 
   def require_ownership
     @note = Note.find(params[:id])
-    unless current_user.id == @note.user_id
+    unless current_user.id == @note.user_id || admin?
       flash[:notices] = ["You must own a note to delete it"]
       redirect_to track_url[params[:track_id]]
     end

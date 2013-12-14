@@ -14,9 +14,10 @@
 	<% end %>
 </ul>
 
-
-<%= link_to "Add an album", new_band_album_url(@band)%>
+<% if admin? %>
+<%= link_to "Add an album", new_band_album_url(@band) %>
 <br>
-<%= link_to "Edit this band", edit_band_url(@band)%>
+<%= link_to "Edit this band", edit_band_url(@band) %>
 <br>
 <%= button_to "DESTROY THIS BAND", band_url(@band), :method => :delete %>
+<% end %>

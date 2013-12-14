@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_filter :require_login, :except => [:show, :index]
+  before_filter :require_admin, :except => [:show, :index]
 
   def new
     @track = Track.new(:album_id => params[:album_id])

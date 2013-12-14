@@ -1,7 +1,10 @@
-<ul>
+<table>
 	<% @users.each do |user| %>
-		<li><%= link_to user.email, user_url(user) %></li>
+	<tr>
+		<td><%= link_to user.email, user_url(user) %></td>
+		<td> <%= button_to "Make Admin", user_admin_url(user) unless user.admin%></td>
+	</tr>
 	<% end %>
-</ul>
+</table>
 
 <%= link_to "New User", new_user_url%>
